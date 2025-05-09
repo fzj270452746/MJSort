@@ -10,25 +10,33 @@ workflows:
         distribution_type: app_store
         bundle_identifier: com.mj.MJSort
       vars:
-        BUNDLE_ID: "com.mj.MJSort"
-#        XCODE_WORKSPACE: "CodemagicSample.xcworkspace"
-        XCODE_SCHEME: "MJSort"
+        BUNDLE_ID: $bundle_identifier
+        PROJECT_PATH: "MJSort" #5:工程名称
+        XCODE_WORKSPACE: "$PROJECT_PATH/$PROJECT_PATH.xcworkspace"
+        XCODE_SCHEME: $PROJECT_PATH
         APP_STORE_APPLE_ID: 6745696865
       xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
       cocoapods: default
-    scripts:
+       scripts:
       - name: Install CocoaPods dependencies
-        script: | 
+        script: |
+          cd $PROJECT_PATH # 切换到包含 Podfile 的目录
           pod install
+
       - name: Set up provisioning profiles settings on Xcode project
         script: xcode-project use-profiles
+
       - name: Increment build number
-        script: | 
-          cd $CM_BUILD_DIR
+        script: |
+          cd $PROJECT_PATH
+          # 确保进入包含 .xcodeproj 文件的目录
+          # 获取最新构建号并增加 1
           LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+
+
       - name: Build ipa for distribution
-        script: | 
+        script: |
           xcode-project build-ipa \
             --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
             --scheme "$XCODE_SCHEME"
@@ -40,22 +48,11 @@ workflows:
     publishing:
       email:
         recipients:
-          - user_1@example.com
+          - 985446278@qq.com
           - user_2@example.com
         notify:
           success: true
           failure: false
       app_store_connect:
         auth: integration
-
-        # Configuration related to TestFlight (optional)
-        # Note: This action is performed during post-processing.
-        submit_to_testflight: true
-        beta_groups: # Specify the names of beta tester groups that will get access to the build once it has passed beta review.
-          - group name 1
-          - group name 2
-
-        # Configuration related to App Store (optional)
-        # Note: This action is performed during post-processing.
-        submit_to_app_store: false
-
+        submit_to_app_store: true
