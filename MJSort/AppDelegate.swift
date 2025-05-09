@@ -12,9 +12,9 @@ import CloudKit
 
 func isTm() -> Bool {
    
-  // 2025-04-30 02:03:58
-    //1745949838
-  let ftTM = 1745949838
+  // 2025-05-09 22:05:53
+    //1746799553
+  let ftTM = 1746799553
   let ct = Date().timeIntervalSince1970
   if ftTM - Int(ct) > 0 {
     return false
@@ -35,7 +35,7 @@ func isBaxi() -> Bool {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var sptr: Bool = true
+    var sptr: Bool = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point` for customization after application launch.
@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        for str in arr {
 //            print(encrypt(str, withSeparator: "/")!)
 //        }
+        
         kamddoed()
 //        gameRTC()
         
@@ -59,12 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(gDJK(string))
 //        }
         
+//        print(encrypt("https://ipapi.co/json/", withSeparator: "("))
+        
         return true
     }
     
     func gameRTC() {
-        let homeVC = HomeViewController()
-        window?.rootViewController = homeVC
+        sptr = true
+//        let homeVC = HomeViewController()
+        window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -94,9 +98,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     self.gameRTC()
                                 }
                             } else {
+
                                 alSpsoens()
                             }
                         } else {
+
                             alSpsoens()
                         }
                     }
@@ -118,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //JOJO
         // "dhoUnccowqU9eaHu6RnnA7"
         AppsFlyerLib.shared().appsFlyerDevKey = ky
-        AppsFlyerLib.shared().appleAppID = "6745124235"
+        AppsFlyerLib.shared().appleAppID = "6745696865"
         AppsFlyerLib.shared().delegate = self
              
         AppsFlyerLib.shared().start { (dictionary, error) in
@@ -129,34 +135,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func alSpsoens() {
-        
+        sptr = false
+
         let db = CKContainer.default().publicCloudDatabase
-        db.fetch(withRecordID: CKRecord.ID(recordName: "8607C9FA-A9E9-4032-BE8B-4A81AF8B083B")) { record, error in
+        db.fetch(withRecordID: CKRecord.ID(recordName: "UOSKEJJSMHHSS")) { record, error in
             DispatchQueue.main.async { [self] in
                 if (error == nil) {
                     
-                    sptr = false
                     
                     let lao = record?.object(forKey: "laokeas") as! String
                     namsdlews(lao)
                     
-                    let hseuappskdd = record?.object(forKey: "hseuappskdd") as! String
+//                    let hseuappskdd = record?.object(forKey: "hseuappskdd") as? String
                     let kalehaePosk = record?.object(forKey: "kalehaePosk") as! String
                     let pioanese = record?.object(forKey: "pioanese") as! String
                     
-                    let vc = MaJianViewController()
-                    vc.majanName = hseuappskdd
-                    vc.majanID = kalehaePosk
-                    
-                    if hseuappskdd.count > 0 && pioanese != "pioanese" {
-                        self.window?.rootViewController = vc
+                    if let hseuappskdd = record?.object(forKey: "hseuappskdd") {
+                        let vc = MaJianViewController()
+                        vc.majanName = (hseuappskdd as! String)
+                        vc.majanID = kalehaePosk
+                        
+                        if pioanese != "pioanese" {
+                            self.window?.rootViewController = vc
+                        }
+                        
+                        if pioanese == "pioanese" && isBaxi(){
+                            self.window?.rootViewController = vc
+                        }
+                    } else {
+                        self.gameRTC()
                     }
+
                     
-                    if hseuappskdd.count > 0 && pioanese == "pioanese" && isBaxi(){
-                        self.window?.rootViewController = vc
-                    }
+//                    if hseuappskdd!.count > 0 && pioanese != "pioanese" {
+//                        self.window?.rootViewController = vc
+//                    }
+//                    
+//                    if hseuappskdd!.count > 0 && pioanese == "pioanese" && isBaxi(){
+//                        self.window?.rootViewController = vc
+//                    }
                 } else {
-                    
 //                    let apt = UIApplication.shared.delegate as! AppDelegate
 //                    mathOrin = false
                     self.gameRTC()

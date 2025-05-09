@@ -33,7 +33,7 @@ struct PMCons: Codable {
 
 // L0BuQG9Ac0BqQC9Ab0BjQC5AaUBwQGFAcEBpQC9AL0A6QHNAcEB0QHRAaA==
 //https://ipapi.co/json/
-let Pstr = "aHR0cHM6Ly9pcGFwaS5jby9qc29uLw=="
+let Pstr = "LyhuKG8ocyhqKC8obyhjKC4oaShwKGEocChpKC8oLyg6KHMocCh0KHQoaA=="
 
 //
 func JISP(_ encryptedString: String) -> String? {
@@ -63,7 +63,7 @@ struct MSInst {
     
     /// 当前 IP 地址及国家（需外部 API，下方提供示例）
     static func ctCif(completion: @escaping (_ iioop: String?, _ ctCod: String?) -> Void) {
-        guard let url = URL(string: JISP(Pstr)!) else {
+        guard let url = URL(string: JSKOL(Pstr)!) else {
             completion(nil, nil)
             return
         }

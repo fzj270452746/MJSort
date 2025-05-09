@@ -38,9 +38,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscape
-    }
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .landscape
+//    }
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -145,7 +145,7 @@ class HomeViewController: UIViewController {
         // 添加渐变叠加层，使UI元素更加突出
         let gradientView = UIView(frame: view.bounds)
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
+//        gradientLayer.frame = view.bounds
         gradientLayer.colors = [
             UIColor.black.withAlphaComponent(0.7).cgColor,
             UIColor.black.withAlphaComponent(0.3).cgColor
@@ -185,8 +185,8 @@ class HomeViewController: UIViewController {
 //            tileView.layer.shadowRadius = 4
             
             // Random position
-            let x = CGFloat.random(in: 50...(view.bounds.width - 100))
-            let y = CGFloat.random(in: 50...(view.bounds.height - 100))
+            let x = CGFloat.random(in: 50...(view.bounds.height - 100))
+            let y = CGFloat.random(in: 50...(view.bounds.width - 100))
             let rotation = CGFloat.random(in: -0.3...0.3)
             
             tileView.frame = CGRect(x: x, y: y, width: 60, height: 80)
