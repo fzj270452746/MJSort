@@ -1,0 +1,6 @@
+framework module Pods_MJSort {
+  umbrella header "Pods-MJSort-umbrella.h"
+
+  export *
+  module * { export * }
+}
