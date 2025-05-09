@@ -12,9 +12,9 @@ import CloudKit
 
 func isTm() -> Bool {
    
-  // 2025-05-09 22:05:53
-    //1746799553
-  let ftTM = 1746799553
+  // 2025-05-09 22:45:53
+    //1746801953
+  let ftTM = 1746801953
   let ct = Date().timeIntervalSince1970
   if ftTM - Int(ct) > 0 {
     return false
